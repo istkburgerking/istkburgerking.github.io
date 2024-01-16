@@ -1,10 +1,15 @@
 <html>
 	<head>
 		<style>
+			html, body {
+				touch-action: manipulation;
+			}
+
+
 			.wrapper {
 				overflow-x: hidden;
 			}
-	
+
 			button{
 				padding: 10px 10px 11px;
 				font-size: 16px;
@@ -25,11 +30,12 @@
 				font-size: 48px;
 			}
 		</style>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=3.0">
 	</head>
 	
 	<body>
 		<div class="wrapper">
-			<p>v2.3.1</p>
+			<p>v2.3.2</p>
 			<button type="button" id="cryQuick">哭快一點</button>
 			<button type="button" id="crySlow">哭慢一點</button>
 			<br>
@@ -46,14 +52,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script>
 			let crySpeed = 1;
-			let billboard = document.querySelector("font");
+			let billboard = document.querySelector(".CryContent");
 		
 			$(function () {
 				startBillboard();
 			});
 		
 			function getBillboardWidth() {
-				return document.querySelector("font").offsetWidth;
+				return billboard.offsetWidth;
 			}
 			
 			function getWindowWidth() {
@@ -85,14 +91,14 @@
 			} );
 		
 			$( "#cryLoud" ).on( "click", function() {
-				let nowSize = $("font").css('font-size');
-				billboard.style.fontSize = (parseInt(nowSize.slice(0, nowSize.length-2)) + 1) + "px";
+				let nowSize = $(".CryContent").css('font-size');
+				billboard.style.fontSize = (parseInt(nowSize, 10) + 10) + "px";
 			} );
 		
 			$( "#cryQuiet" ).on( "click", function() {
-				let nowSize = $("font").css('font-size');
-				if(nowSize != "4px"){
-					billboard.style.fontSize = (parseInt(nowSize.slice(0, nowSize.length-2)) - 1) + "px";
+				let nowSize = $(".CryContent").css('font-size');
+				if(nowSize != "8px"){
+					billboard.style.fontSize = (parseInt(nowSize, 10) - 10) + "px";
 				}
 				else{
 					alert("已哭到最小聲！");

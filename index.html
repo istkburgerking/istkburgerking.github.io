@@ -62,7 +62,7 @@
 	
 	<body>
 		<div class="wrapper">
-			<p>v2.4.0</p>
+			<p>v2.4.1</p>
 			<button type="button" id="cryQuick">哭快一點</button>
 			<button type="button" id="crySlow">哭慢一點</button>
 			<br>
@@ -93,9 +93,9 @@
 
 				blackGround.innerHTML = "";
 				
-				// 每 10 個字就切一塊
-				for (let i = 0; i < cryWhat.length; i += 10) {
-        			blackGround.innerHTML += '<span class="CryContent">' + cryWhat.substring(i, i + 10) + '</span>';
+				// 每 7 個字就切一塊
+				for (let i = 0; i < cryWhat.length; i += 7) {
+        			blackGround.innerHTML += '<span class="CryContent">' + cryWhat.substring(i, i + 7) + '</span>';
     			}
 			}
 		
@@ -122,13 +122,22 @@
 				let initLeft = getWindowWidth();
 
 				let timer = setInterval(() => {
+					let billboard = document.querySelectorAll(".CryContent");
+
 					if (initLeft < getBillboardWidth() * -1) {
-						initLeft = getWindowWidth();
+						if((getBillboardWidth() >= getWindowWidth()) || 	//如果所有跑馬燈寬度超過螢幕寬度
+						 	(initLeft < getWindowWidth() * -1)				//避免比較短的跑馬燈跑到畫面一半就消失了
+						 )
+						{
+							initLeft = getWindowWidth();
+						}
+						
 					}
 					initLeft -= crySpeed;
 					
-					let billboard = document.querySelectorAll(".CryContent");
+					
 					billboard.forEach(function (eachBoard) {
+						console.log("initLeft = " + initLeft);
 						eachBoard.style.left = initLeft + "px";
 					});
 				}, 10);
